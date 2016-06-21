@@ -1,5 +1,9 @@
 Genome Coverage Suite
 ===
+This program allows users to graph coverage from chip sequencing. There are five main features, getting coverage data from bam files, subtracting a control, graphing the whole genome, graphing a range of positions in the genome, and graphing metagene data.
+
+Dependencies: matplotlib, numpy, pandas, pysam, cPickle
+These are all installed in a virtualenv on honey-badger. You can activate it by typing `source /home/susan/susan/bin/activate`. If you are not working in an environment with these dependencies installed, the program will throw an error.
 
 There are 2 ways to run the coverage suite:
 
