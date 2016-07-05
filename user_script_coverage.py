@@ -10,19 +10,28 @@ def main():
 		firsttime=raw_input("please type a valid response, y or n")
 	if firsttime in yeses:
 		filenames=raw_input("Yes? Let's create some index files and pileups of coverage. Type a comma separated list of your sorted bam files (including paths), then press enter.\n")
-		genome_len=int(raw_input("How long is the genome?\n"))
+		sequence_file=(raw_input("What is the name of your sequence file (fasta format)?\n"))
 		print "This will take about 5 minutes for each file"
 		filenameslist=[name.strip(" ") for name in filenames.split(",")]
 
-		index_and_pileup(genome_len,filenameslist)
-
+		index_and_pileup(sequence_file,filenameslist)
+		filenameslist=["/".join(bam_file.split("/")[:-1]) for bam_file in filenameslist]
 	controls=raw_input("Ok. Have you already subtracted any controls you want to? Type ! if you will not be subtracting any controls. Type y/n/!\n")
 	while controls not in yeses+nos+['!']:
 		controls=raw_input("please type a valid response, y, n, !\n")
 	if controls in nos:
 		controlfile=raw_input("What folder contains your control file?\n")
-		filenames=raw_input("What folders contain the data you want to subtract this control from? Please type a comma separated list.\n")	
-		filenameslist=[name.strip(" ") for name in filenames.split(",")]
+		if filenameslist:
+			print "You used data in these folders before: ", filenameslist
+                        b=raw_input("Do you want to use these again? y/n\n")
+                        while b not in yeses+nos:
+                                b=raw_input("please type a valid response, y, n\n")
+                        if b in nos:
+                                filenames=raw_input("What folders contain your data?\n")
+                        	filenameslist=[name.strip(" ") for name in filenames.split(",")]
+		else:
+			filenames=raw_input("What folders contain the data you want to subtract this control from? Please type a comma separated list.\n")	
+			filenameslist=[name.strip(" ") for name in filenames.split(",")]
 		print "this will take just a minute"
 		clean_data(filenameslist, controlfile)
 	if controls=="!":
@@ -35,13 +44,13 @@ def main():
 		a=raw_input("Please type a valid response, y or n\n")
 	if a in yeses:
 		if filenames:	
-			print "You listed these filenames: ", filenameslist
+			print "You used data in these folders before: ", filenameslist
 			b=raw_input("Do you want to use these again? y/n\n")
 			while b not in yeses+nos:
 				b=raw_input("please type a valid response, y, n\n")
 			if b in nos:
 				filenames=raw_input("What folders contain your data?\n")
-			filenameslist=[name.strip(" ") for name in filenames.split(",")]
+				filenameslist=[name.strip(" ") for name in filenames.split(",")]
 		else:
 			filenames=raw_input("What folders contain your data?\n")
                         filenameslist=[name.strip(" ") for name in filenames.split(",")]
@@ -62,7 +71,7 @@ def main():
                 a=raw_input("Please type a valid response, y or n\n")
         if a in yeses:	
 		if filenames:
-                        print "You listed these filenames: ", filenameslist
+                        print "You used data in these folders before: ", filenameslist
                         b=raw_input("Do you want to use these again? y/n\n")                        
 			while b not in yeses+nos:
                                 b=raw_input("please type a valid response, y, n\n")
@@ -80,7 +89,7 @@ def main():
         if a in yeses:
 		CDS_list=raw_input("What is the filename of your cds list? It must be a csv and formatted like the example.\n")
 		if filenames:
-                        print "You listed these filenames: ", filenameslist
+                        print "You used data in these folders before: ", filenameslist
                         b=raw_input("Do you want to use these again? y/n\n")
 			while b not in yeses+nos:
                                 b=raw_input("please type a valid response, y, n\n")

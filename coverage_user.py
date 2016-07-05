@@ -26,7 +26,17 @@ def main():
         elif len(args)==3:
                 eval(function)(args[0],args[1],args[2])
 
-def index_and_pileup(genome_len, bam_files):
+def find_len(sequence_file):
+        length =0
+        with open(sequence_file, "rU") as f:
+                for line in f:
+                        if line[0]!=">":
+                                length+=len(line)
+        print length
+        return length
+
+def index_and_pileup(sequence_file, bam_files):
+	genome_len=find_len(sequence_file)
 	for bam_file in bam_files:
 		print "processing", bam_file
 	        pysam.index(bam_file)

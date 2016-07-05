@@ -14,8 +14,8 @@ Type `python user_script_coverage.py` from this folder and it will talk you thro
 Type `python coverage_user.py function arguments` from this folder.
 Here are the functions available to you through that version.
 
-* **index_and_pileup ( genome_length, bam_files )**
- `python coverage_user.py index_and_pileup 4309328 [folder1/condition1_sorted.bam, folder2/condition2_sorted.bam, folder3/condition3_sorted.bam]`
+* **index_and_pileup ( genome_file, bam_files )**
+ `python coverage_user.py index_and_pileup ecoli_ref.fasta [folder1/condition1_sorted.bam, folder2/condition2_sorted.bam, folder3/condition3_sorted.bam]`
 This generates an index file *[Bamfilename].bai* and a coverage file *coverage.pkl* for each bam file listed.
 *You must run this function once per bam file to generate the necessary data files for the other functions*
 
