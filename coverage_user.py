@@ -65,13 +65,15 @@ def load_clean_data(filename):
 
 def graph_range(genomerange, enclosings, out_of_control=False):	
 	for enclosing in enclosings:
+		print enclosing
 		immediate=enclosing.split("/")[-1]
+		print immediate
 		if out_of_control:
 			data=load_clean_data(enclosing+"/"+immediate+"_coverage.pkl")
 		else:
 			data=load_clean_data(enclosing+"/"+immediate+"_coverage_controlled.pkl")
-		start=genomerange[0]
-		end=genomerange[1]
+		start=int(genomerange[0])
+		end=int(genomerange[1])
 		d=os.path.dirname(enclosing)+'/coverage_'+str(start)+"_"+str(end)
 		if not os.path.exists(d):
 			os.makedirs(d)
@@ -83,8 +85,10 @@ def graph_range(genomerange, enclosings, out_of_control=False):
 		ax.set_xticklabels( range(start, end, 500))
 		if out_of_control:
 			plt.savefig(d+'/coverage_'+immediate+"_"+str(start)+"_"+str(end))
+			print (d+'/coverage_'+immediate+"_"+str(start)+"_"+str(end))
 		else:
 			plt.savefig(d+'/coverage_controlled_'+immediate+"_"+str(start)+"_"+str(end))
+			print (d+'/coverage_'+immediate+"_"+str(start)+"_"+str(end))
 		plt.clf()
 		plt.close()
 		print "Graphed", enclosing, "from", start, "to", end
@@ -153,4 +157,5 @@ def graph_metagene(plus1sfile, folders, out_of_control=False, _range=1000):
 		print "loaded data", enclosing
 		plus1s=parse_plus1s(plus1sfile)
 		plot_plus1s(plus1s,cleaned_data, enclosing, _range)
-
+if __name__ == '__main__':
+	main()

@@ -25,7 +25,7 @@ This function subtracts the controlled data from the listed control folder from 
 *If you don't want to subtract any control data, make sure to set out_of_control=True where it is an option. *
 
 * **graph_range ( genome_range, data_folders, out_of_control=False )**
- `python coverage_user.py graph_data_by_range [0,1000] [folder1,folder2]`
+ `python coverage_user.py graph_range [0,1000] [folder1,folder2]`
 This function generates line graphs for the given range of data for the data in each of the files listed.  
 eg. coverage_start_end/coverage_controlled_enclosing_start_end.png The new enclosing folder is created if absent.
 If the data does not have a control, add `True` at the end:
