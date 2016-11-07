@@ -5,6 +5,7 @@ def main():
 	yeses=['y','Yes','Y','yes']
 	nos=['n', 'no', 'N', 'No']
 	filenames=[]
+	filenameslist=[]
 	firsttime=raw_input("Hello! Is this your first time running this program for this dataset? y/n\n")
 	while firsttime not in yeses+nos:	
 		firsttime=raw_input("please type a valid response, y or n")
